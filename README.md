@@ -173,7 +173,7 @@ The results will be printed in the **Tcl Console** at the bottom of the Vivado w
 
 ---
 
-### 4. Troubleshooting 🛠️
+### 3. Troubleshooting 🛠️
 
 * **`WARNING: Too many words specified in data file...`**: This means your `riscvtest.mem` program is larger than the memory defined in your `imem` module in `riscvsingle.sv`. To fix it, increase the size of the `RAM` array inside the `imem` module (e.g., from `RAM[63:0]` to `RAM[255:0]`).
 * **File Not Found Error**: If the simulator reports that it cannot find `riscvtest.mem`, double-check that you have placed the file in the correct simulation directory as described in Step 2.
