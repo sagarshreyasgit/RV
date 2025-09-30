@@ -47,8 +47,6 @@ This file specifies the test program for the RVX10 single-cycle processor. The p
 
 ![risctest.mem](https://github.com/user-attachments/assets/a7710874-5da2-47a9-b648-a8fef01ba181)
 
-![risctest.mem_2](https://github.com/user-attachments/assets/3a967e8c-093e-4f6f-acdb-0c3e7a98e328)
-
 ![Risc test reg file screenshot](https://github.com/user-attachments/assets/2890c3d8-06ea-410c-abf9-39f7d5f3c313)
 
 ![Sample of Sarah Harris ref book Digital design and computer architecture](https://github.com/user-attachments/assets/87863e0f-9cb3-4b95-a4ff-1014210ddfe1)
@@ -62,6 +60,7 @@ This file specifies the test program for the RVX10 single-cycle processor. The p
 * ABS(INT\_MIN) returns 0x80000000.
 * x0 writes are ignored.
 * Final store writes 25 to address 100.
+
 
 
 
