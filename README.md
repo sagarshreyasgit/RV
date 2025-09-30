@@ -116,3 +116,64 @@ For each new 5-bit `ALUControl` code, a new entry was added to the `case` statem
 
 - **Absolute Value (`ABS`)**:  
   A signed comparison checks if the input is non-negative. If it is, the original value is passed through; otherwise, its two's complement negative is calculated and returned.
+  
+## How To Rum/Build
+
+### 1. Requirements 💻
+
+To build and run this project, you will need a SystemVerilog simulator. These instructions are tailored for **Xilinx Vivado**, but the process is similar for other simulators like ModelSim or Verilator.
+
+* **Software:** Xilinx Vivado (or any SystemVerilog-compliant simulator)
+* **Source Files:**
+    * `riscvsingle.sv`: Contains the complete hardware description and testbench.
+    * `riscvtest.mem`: The hexadecimal machine code for the test program.
+
+---
+
+### 2. Build and Run Instructions 🚀
+
+Follow these steps to compile the hardware and run the test program.
+
+#### Step 1: Create a New Project
+
+1.  Launch Vivado and create a new project by selecting **File > Project > New**.
+2.  In the "Add Sources" dialog, click **Add Files**, navigate to your project directory, and select the `riscvsingle.sv` file. Ensure "Copy sources into project" is checked.
+3.  Proceed through the wizard without adding constraints or selecting a part (this is not necessary for a behavioral simulation).
+
+
+
+#### Step 2: Place the Test Program File
+
+This is the most critical step. The simulator needs to find your test program to load it into the instruction memory.
+
+1.  Navigate to your Vivado project directory on your computer.
+2.  Find the simulation folder, which is typically located at `<Your_Project_Folder>/<Project_Name>.sim/sim_1/behav/xsim/`.
+3.  **Copy** your test program file (`riscvtest.mem`) into this `xsim` directory.
+
+The hardware's `$readmemh` task looks for the file in the directory where the simulation is run, which is why this placement is necessary.
+
+#### Step 3: Run the Simulation
+
+1.  In the Vivado "Flow Navigator" pane on the left, click **Run Simulation > Run Behavioral Simulation**.
+2.  The simulator will compile your `riscvsingle.sv` file and launch the simulation GUI. The test program will start running automatically.
+
+#### Step 4: Check the Results
+
+The results will be printed in the **Tcl Console** at the bottom of the Vivado window.
+
+* ✅ **If the simulation is successful**, you will see the following message, and the simulation will stop:
+    ```
+    Simulation succeeded
+    ```
+
+* ❌ **If the simulation fails**, the test program will write the ID of the failing test case to memory address 96. You will see this message:
+    ```
+    Simulation failed at test case ID stored in mem[96]
+    ```
+
+---
+
+### 4. Troubleshooting 🛠️
+
+* **`WARNING: Too many words specified in data file...`**: This means your `riscvtest.mem` program is larger than the memory defined in your `imem` module in `riscvsingle.sv`. To fix it, increase the size of the `RAM` array inside the `imem` module (e.g., from `RAM[63:0]` to `RAM[255:0]`).
+* **File Not Found Error**: If the simulator reports that it cannot find `riscvtest.mem`, double-check that you have placed the file in the correct simulation directory as described in Step 2.
